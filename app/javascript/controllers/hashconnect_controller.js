@@ -1,6 +1,6 @@
 import { Controller } from "@hotwired/stimulus"
-import { HashConnect, HashConnectConnectionState } from "hashconnect"
-import { LedgerId } from "@hashgraph/sdk"
+// import { HashConnect, HashConnectConnectionState } from "hashconnect"
+// import { LedgerId } from "@hashgraph/sdk"
 
 export default class extends Controller {
     static values = {
@@ -16,6 +16,10 @@ export default class extends Controller {
     }
 
     async initHashConnect() {
+        const HashConnect = window.HashConnect; // Access from global scope
+        const HashConnectConnectionState = window.HashConnectConnectionState; // Assume this is globally available, adjust accordingly
+        const LedgerId = window.LedgerId; // Assume this is also globally available, adjust accordingly
+
         const appMetadata = {
             name: this.appNameValue,
             description: this.appDescriptionValue,
@@ -49,7 +53,7 @@ export default class extends Controller {
 
         this.hashconnect.connectionStatusChangeEvent.on((connectionStatus) => {
             this.state = connectionStatus;
-            console.log("Connection status changed", state);
+            console.log("Connection status changed", this.state);
         })
     }
 
