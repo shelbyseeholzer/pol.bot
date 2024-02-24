@@ -1,0 +1,15 @@
+<%= form_with model: [@article, @article.comments.build], class: "space-y-4 px-12 pb-12" do |form| %>
+  <div>
+    <%= form.label :commenter, class: "block  text-sm font-medium text-stone-700" %>
+    <%= form.text_field :commenter, id: "commenter", maxlength: 30, class: "mt-1 block w-1/4 rounded-md border-stone-300 shadow-sm focus:border-stone-300 focus:ring focus:ring-stone-200 focus:ring-opacity-50" %>
+  </div>
+  <div>
+    <%= form.label :body, class: "block text-sm font-medium text-stone-700" %>
+    <%= form.text_area :body, id: "body", rows: 4, class: "mt-1 block w-full rounded-md border-stone-300 shadow-sm focus:border-stone-300 focus:ring focus:ring-stone-200 focus:ring-opacity-50" %>
+  </div>
+  <div>
+    <%= form.submit "Submit Comment", class: "inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-lime-800 hover:bg-lime-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-stone-300" %>
+  </div>
+  <!-- for edit comment -->
+</div>
+<% end %>

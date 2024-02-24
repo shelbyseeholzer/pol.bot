@@ -1,0 +1,44 @@
+<div class="bg-stone-50 py-24 sm:py-32">
+  <div class="mx-auto max-w-7xl px-6 lg:px-8">
+    <div class="mx-auto max-w-2xl">
+      <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">From the blog</h2>
+      <p class="mt-2 text-lg leading-8 text-gray-600">The mountains are calling so you have to figure out this shit. </p>
+      <div class="mt-10 space-y-16 border-t border-gray-200 pt-10 sm:mt-16 sm:pt-16">
+        <% if @articles.present? %>
+          <% @articles.each do |article| %>
+            <article class="flex max-w-xl flex-col items-start justify-between">
+              <div class="flex items-center gap-x-4 text-xs">
+                <p>Published: <%= article.created_at.strftime('%b %d, %Y') %></p>
+              </div>
+              <div class="group relative">
+                <h3 class="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
+                  <a href="#">
+                    <h3><%= link_to article.title, article_path(article) %></h3>
+                  </h3>
+                  <p class="mt-5 line-clamp-3 text-sm leading-6 text-gray-600"><%=  truncate(article.body, length: 120) %></p>
+                </div>
+                <div class="relative mt-8 flex items-center gap-x-4">
+                  <img src=<%= image_path'shelby.jpg' %> alt="Shelby Oregon" class="h-10 w-10 rounded-full bg-stone-50">
+                  <div class="text-sm leading-6">
+                    <p class="font-semibold text-gray-900">
+                      <a href="#">
+                        <span class="absolute inset-0"></span>
+                        s. seee
+                      </a>
+                    </p>
+                    <p class="text-gray-600">Co-Founder / CEO</p>
+                  </div>
+                </div>
+              </article>
+              <div class=" border-t border-gray-200" div>
+              </div>
+            <% end %>
+          </div>
+        <% else %>
+          <p>That's all we've got.</p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

@@ -1,0 +1,15 @@
+<!-- Inside _edit.html.erb -->
+<%= form_with(model: [@article, @article.comments.build], local: true) do |form| %>
+  <%# Form fields here %>
+  <div>
+    <%= form.label :commenter %>
+    <%= form.text_field :commenter %>
+  </div>
+  <div>
+    <%= form.label :body %>
+    <%= form.text_area :body %>
+  </div>
+  <%= form.submit "Update Comment" %>
+<% end %>
+<%# Currently trying to figure out how to add an edit form wihtout changing
+the page rendering.  %>
