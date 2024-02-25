@@ -11,10 +11,6 @@ export default class extends Controller {
         projectId: String
     }
 
-    connect() {
-        this.initHashConnect()
-    }
-
     async initHashConnect() {
         const HashConnect = window.HashConnect; // Access from global scope
         const HashConnectConnectionState = window.HashConnectConnectionState; // Assume this is globally available, adjust accordingly
