@@ -60,6 +60,7 @@ export default class extends Controller {
             console.log("Transaction success", response);
         } catch (err) {
             console.error("Transaction error", err);
+            // in order to use this application, the user must be connected
         }
     }
 }
