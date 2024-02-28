@@ -1,3 +1,6 @@
+# Database migrations
+# creates and adds messages to the database. Includes the message_content and timestamps columns
+
 class AddMessages < ActiveRecord::Migration[7.0]
   # this migration will modify the database schema
   def change

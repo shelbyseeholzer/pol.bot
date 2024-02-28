@@ -1,3 +1,10 @@
+// Creates a new smart contract on the Hedera network
+// First creates a client that talks to Hedera -- .sol = solidity code
+// Then creates a transaction that uploads smart contract to a file an Hedera --
+// Instantiates the smart contract and gets the contract ID. --
+// Deletes file that is created on Hedera network
+//
+//takes bytecode and puts it onto the Hedera network
 const {
     Client,
     PrivateKey,
@@ -31,13 +38,17 @@ client.setOperator(myAccountId, myPrivateKey);
 client.setDefaultMaxTransactionFee(new Hbar(100));
 
 //Set the maximum payment for queries (in Hbar)
-client.setMaxQueryPayment(new Hbar(50));
+// client.setMaxQueryPayment(new Hbar(50));
 
 //Import the compiled contract from the HederaSmartContract.json file
 let hederaSmartContract = require("./smart_contracts/HederaSmartContract.json");
 const bytecode = hederaSmartContract.data.bytecode.object;
 
-//Create the transaction
+//Create the transaction. This is the program that is upload the smart contrat 
+// 1. create a file
+// 2. write and put code into file
+// 3. run code
+// 4. delete
 const contractCreate = new ContractCreateFlow()
     .setGas(100000)
     .setBytecode(bytecode);

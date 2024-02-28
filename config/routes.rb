@@ -23,6 +23,8 @@ Rails.application.routes.draw do
   resources :articles do
     resources :comments, only: %i[create destroy edit update]
   end
+
+  post '/ingest', to: 'device_message#create', as: :ingest
 end
 # Expands into the routes below
 # GET /articles mapped to articles#index # lists all of the articles
