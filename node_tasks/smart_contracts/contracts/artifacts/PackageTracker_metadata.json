@@ -1,0 +1,106 @@
+{
+	"compiler": {
+		"version": "0.8.9+commit.e5eed63a"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [],
+				"name": "currentLocation",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "latitude",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "longitude",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_latitude",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_longitude",
+						"type": "uint256"
+					}
+				],
+				"name": "isAtLocation",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_latitude",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_longitude",
+						"type": "uint256"
+					}
+				],
+				"name": "updateLocation",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/HelloWorld1.sol": "PackageTracker"
+		},
+		"evmVersion": "london",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contracts/HelloWorld1.sol": {
+			"keccak256": "0x9d324c3e1050b91402950fb8ab8fcec9a968a9aff974802d713f1ddc0497732a",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://86afe4b71edb97ae33d342f1ebc6b992647404da67bbdd5828cf2bb1dcc97029",
+				"dweb:/ipfs/QmQyh8b1hP2h3jSxMng7wdixkzdpu4TsTEdGdPHFfehRap"
+			]
+		}
+	},
+	"version": 1
+}

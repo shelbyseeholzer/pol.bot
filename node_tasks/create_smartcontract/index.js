@@ -12,10 +12,10 @@ const {
     AccountBalanceQuery,
     Hbar,
     TransferTransaction,
+    ContractCreateFlow,
 } = require("@hashgraph/sdk");
 
 require("dotenv").config();
-
 
 //Grab your Hedera testnet account ID and private key from your .env file
 const myAccountId = process.env.MY_ACCOUNT_ID;
@@ -41,27 +41,32 @@ client.setDefaultMaxTransactionFee(new Hbar(100));
 // client.setMaxQueryPayment(new Hbar(50));
 
 //Import the compiled contract from the HederaSmartContract.json file
-let hederaSmartContract = require("./smart_contracts/HederaSmartContract.json");
-const bytecode = hederaSmartContract.data.bytecode.object;
+let hederaSmartContract = require("../smart_contracts/HederaSmartContract.json");
+const bytecode = hederaSmartContract.object;
 
-//Create the transaction. This is the program that is upload the smart contrat 
-// 1. create a file
-// 2. write and put code into file
-// 3. run code
-// 4. delete
-const contractCreate = new ContractCreateFlow()
-    .setGas(100000)
-    .setBytecode(bytecode);
+async function main() {
 
-//Sign the transaction with the client operator key and submit to a Hedera network
-const txResponse = contractCreate.execute(client);
+    //Create the transaction. This is the program that is upload the smart contrat 
+    // 1. create a file
+    // 2. write and put code into file
+    // 3. run code
+    // 4. delete
+    const contractCreate = new ContractCreateFlow()
+        .setGas(1000000)
+        .setBytecode(bytecode);
 
-//Get the receipt of the transaction
-const receipt = (await txResponse).getReceipt(client);
+    //Sign the transaction with the client operator key and submit to a Hedera network
+    const txResponse = contractCreate.execute(client);
 
-//Get the new contract ID
-const newContractId = (await receipt).contractId;
+    //Get the receipt of the transaction
+    const receipt = (await txResponse).getReceipt(client);
 
-console.log("The new contract ID is " + newContractId);
-//SDK Version: v2.11.0-beta.1
+    //Get the new contract ID
+    const newContractId = (await receipt).contractId;
 
+    console.log("The new contract ID is " + newContractId);
+    //SDK Version: v2.11.0-beta.1
+
+}
+// Call the main function
+main().catch(console.error);

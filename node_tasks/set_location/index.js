@@ -16,7 +16,6 @@ require("dotenv").config();
 const myAccountId = process.env.MY_ACCOUNT_ID;
 const myPrivateKey = process.env.MY_PRIVATE_KEY;
 
-// If we weren't able to grab it, we should throw a new error
 if (!myAccountId || !myPrivateKey) {
     throw new Error(
         "Environment variables MY_ACCOUNT_ID and MY_PRIVATE_KEY must be present"
@@ -35,14 +34,8 @@ client.setDefaultMaxTransactionFee(new Hbar(100));
 //Set the maximum payment for queries (in Hbar)
 // client.setMaxQueryPayment(new Hbar(50));
 
-
-
-
-
-
+// Assume all necessary Hedera SDK imports and client initialization are done below
 async function setLocation(gas, newContractId, deviceId, lat, long) {
-    // Assume all necessary Hedera SDK imports and client initialization are done above
-
     const contractExecTx = await new ContractExecuteTransaction()
         .setContractId(newContractId)
         .setGas(gas)
@@ -50,8 +43,6 @@ async function setLocation(gas, newContractId, deviceId, lat, long) {
 
     const submitExecTx = await contractExecTx.execute(client);
     const receipt = await submitExecTx.getReceipt(client);
-
-    // console.log("The transaction status is " + receipt.status.toString());
 
     // Return a value, for example, the transaction status
     return receipt.status.toString();

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_01_22_215130) do
+ActiveRecord::Schema[7.0].define(version: 2024_02_25_201049) do
   create_table "articles", force: :cascade do |t|
     t.string "title"
     t.text "body"
@@ -25,6 +25,12 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_22_215130) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["article_id"], name: "index_comments_on_article_id"
+  end
+
+  create_table "device_messages", force: :cascade do |t|
+    t.json "message_content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "subscribers", force: :cascade do |t|
