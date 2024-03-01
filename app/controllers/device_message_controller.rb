@@ -26,15 +26,16 @@ class DeviceMessageController < ApplicationController
     # Need to write device location message to Hedera Smart Contract
     # get lat and long from the message
     rxInfo = _device_message.message_content['rxInfo'] # array of objects
-    first = rxInfo[0]
-    metadata = first['metadata']
-    gateway_long = metadata['gateway_long']
-    gateway_lat = metadata['gateway_lat']
+    # first = rxInfo[0]
+    # metadata = first['metadata']
+    # gateway_long = metadata['gateway_long']
+    # gateway_lat = metadata['gateway_lat']
+    sensor_loc = calculate_sensor_location(rxInfo)
 
     deviceInfo = _device_message.message_content['deviceInfo']
     deviceId = deviceInfo['devEui']
 
-    set_location(deviceId, gateway_lat, gateway_long)
+    set_location(deviceId, sensor_loc[:lat], sensor_loc[:lng])
   end
 
   def set_location(_deviceId, _lat, _lng)
@@ -66,5 +67,30 @@ class DeviceMessageController < ApplicationController
 
     # Convert the binary hash to a hexadecimal string.
     hash_bytes.unpack1('H*')
+  end
+
+  def calculate_sensor_location(rx_info) # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
+    # Initialize variables to calculate weighted averages
+    lat_sum = 0.0
+    long_sum = 0.0
+    weight_sum = 0.0
+
+    rx_info.each do |gateway|
+      rssi = gateway['rssi']
+      snr = gateway['snr']
+      lat = gateway['metadata']['gateway_lat'].to_f
+      long = gateway['metadata']['gateway_long'].to_f
+
+      # Calculate a simple weight - this is a very naive approach
+      # In reality, you'd need a more sophisticated method
+      weight = 1.0 / (rssi.abs + (1.0 / snr))
+
+      lat_sum += lat * weight
+      long_sum += long * weight
+      weight_sum += weight
+    end
+
+    # Calculate weighted average of lat and long
+    { lat: lat_sum / weight_sum, lng: long_sum / weight_sum }
   end
 end
