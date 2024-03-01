@@ -24,10 +24,10 @@ It is not content-- which should be stored in the view folder of the controller 
             <div class="flex w-full items-center justify-between md:w-auto">
               <%= link_to(root_path) do %>
                 <span class="sr-only">Your Company</span>
-                <img class="h-8 w-auto sm:h-10" src="https://tailwindui.com/img/logos/mark.svg?from-color=lime&from-shade=800&to-color=lime&to-shade=800&toShade=400" alt="" >
+                <img class="h-8 w-auto sm:h-10" src=<%= image_path'polbotlogo.jpg' %> alt="polbotlogo">
               <% end %>
               <div class="-mr-2 flex items-center md:hidden">
-                <button type="button" class="focus-ring-inset relative inline-flex items-center justify-center rounded-md bg-stone-900 p-2 text-stone-400 hover:bg-stone-800 focus:outline-none focus:ring-2 focus:ring-white" aria-expanded="false">
+                <button type="button" class="focus-ring-inset relative inline-flex items-center justify-center bg-stone-900 p-2 text-stone-400 hover:bg-stone-800 focus:outline-none focus:ring-2 focus:ring-white" aria-expanded="false">
                   <span class="absolute -inset-0.5"></span>
                   <span class="sr-only">Open main menu</span>
                   <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
@@ -42,7 +42,7 @@ It is not content-- which should be stored in the view folder of the controller 
             </div>
           </div>
           <div class="hidden md:flex md:items-center md:space-x-6">
-            <span class="inline-flex items-center rounded-md border border-transparent bg-white px-4 py-2 text-base font-medium text-stone-700 hover:bg-sky-100"></a>
+            <span class="inline-flex items-center border border-transparent bg-white px-4 py-2 text-base font-medium text-stone-700 hover:bg-stone-400"></a>
             <div data-controller="hashconnect"
                               data-hashconnect-app-name-value="pol.bot"
                               data-hashconnect-app-description-value="Proof of Location"
@@ -65,7 +65,7 @@ It is not content-- which should be stored in the view folder of the controller 
         <div class="xl:grid xl:grid-cols-3 xl:gap-8">
           <div class="space-y-8 xl:col-span-1">
             <%= link_to(root_path) do %>
-              <img class="h-10" src="https://tailwindui.com/img/logos/mark.svg?color=lime&shade=800" alt="Company name">
+              <img class="h-10" src=<%= image_path'polbotlogo.jpg' %> alt="polbotlogo">
             <% end %>
           </div>
           <div class="mt-12 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0">
@@ -75,7 +75,7 @@ It is not content-- which should be stored in the view folder of the controller 
                 <ul role="list" class="mt-4 space-y-4">
                   <li>
                     <%= link_to 'about' do %>
-                      <span class="text-base text-stone-500 hover:text-stone-900">About</span>
+                      <span class="text-base text-stone-200 hover:text-stone-900">About</span>
                     <% end %>
                   </li>
                 </ul>

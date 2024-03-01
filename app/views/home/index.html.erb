@@ -2,22 +2,22 @@
   <div class="relative overflow-hidden">
     <!-- main -->
     <main class="bg-stone-50" >
-      <div class="pt-10 sm:pt-16 lg:overflow-hidden lg:pb-14 lg:pt-8">
-        <div class="mx-auto max-w-5xl lg:px-8">
+      <div class="pt-10 sm:pt-16 lg:overflow-hidden lg:pt-8">
+        <div class="mx-auto max-w-5xl lg:px-2">
           <div class="lg:grid lg:grid-cols-2 lg:gap-8">
             <div class="mx-auto max-w-md px-6 sm:max-w-2xl sm:text-center lg:flex lg:items-center lg:px-0 lg:text-left">
-              <div class="lg:py-24">
+              <div class="lg:py-8">
                 <h1 class="mt-4 text-4xl font-bold tracking-tight text-stone-600 sm:mt-5 sm:text-6xl lg:mt-6 xl:text-6xl">
                   <span class="block">Welcome</span>
                   <span class="block bg-gradient-to-r from-amber-700 to-amber-100 bg-clip-text pb-3 text-transparent sm:pb-5">Home</span>
                 </h1>
-                <p class="text-base text-stone-500 sm:text-xl lg:text-lg xl:text-xl">With pol.bot, you can _____________ and earn rewards. Connect your Hashpack wallet to get started. 
+                <p class="text-base text-stone-500 sm:text-xl lg:text-lg xl:text-xl">With pol.bot, you can indisputably prove a location and earn rewards. Connect your Hashpack wallet to get started. 
                 </p>
                 <div class="mt-10 sm:mt-12">
                   <div class="sm:mx-auto sm:max-w-xl lg:mx-0">
                     <div class="sm:flex">
                       <div class="mt-3 sm:ml-3 sm:mt-0">
-                        <span class="block w-full rounded-md bg-gradient-to-r from-lime-900 to-lime-800 px-4 py-3 font-medium text-white hover:text-stone-500 shadow hover:from-stone-300 hover:to-stone-200 "></a>
+                        <span class="block w-full bg-gradient-to-r from-lime-900 to-lime-800 px-4 py-3 font-medium text-stone-100 hover:text-stone-500 shadow hover:from-stone-300 hover:to-stone-200 "></a>
                         <div data-controller="hashconnect"
                               data-hashconnect-app-name-value="pol.bot"
                               data-hashconnect-app-description-value="Proof of Location"
@@ -32,32 +32,44 @@
                     </div>
                   </div>
                 </div>
-                <div class="-mb-16 mt-12 sm:-mb-48 lg:relative lg:m-0">
-                  <div class="mx-auto max-w-md px-6 sm:max-w-2xl lg:max-w-none lg:px-0">
-                    <!-- Illustration taken from Lucid Illustrations: https://lucid.pixsellz.io/ -->
-                    <img class="w-full lg:absolute lg:inset-y-0 lg:left-0 lg:h-full lg:w-auto lg:max-w-none" src="" alt="">
-                  </div>
-                </div>
               </div>
             </div>
           </div>
-          <!-- Get Notified -->
-          <div class="mx-auto my-auto max-w-5xl lg:pb-28 sm:pb-12">
-            <div class="relative isolate overflow-hidden bg-stone-300 px-6 py-24 shadow-2xl sm:rounded-3xl sm:px-24 xl:py-32">
-              <h2 class="mx-auto max-w-2xl text-center text-3xl font-bold tracking-tight text-stone-700 sm:text-4xl">Get notified when we’re launching.</h2>
-              <p class="mx-auto mt-2 max-w-xl text-center text-lg leading-8 text-stone-500">Reprehenderit ad esse et non officia in nulla. Id proident tempor incididunt nostrud nulla et culpa.</p>
-              <%# form %>
-              <%= render 'subscribers/form' %>
-              <svg viewBox="0 0 1024 1024" class="absolute left-1/2 top-1/2 -z-10 h-[64rem] w-[64rem] -translate-x-1/2" aria-hidden="true">
-                <circle cx="512" cy="512" r="512" fill="url(#759c1415-0410-454c-8f7c-9a820de03641)" fill-opacity="0.7" />
-                <defs>
-                </defs>
-              </svg>
-            </div>
-          </div>
         </div>
-        <!--footer-->
+      </div>
+      <div class="mx-auto my-auto max-w-5xl mb-12" >
+        <dl class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-3">
+          <div class="overflow-hidden bg-amber-900 px-4 py-5 shadow sm:p-6">
+            <dt class="truncate text-sm font-medium text-stone-300">Location within</dt>
+            <dd class="mt-1 text-3xl font-semibold tracking-tight text-stone-100">1 Meter</dd>
+          </div>
+          <div class="overflow-hidden bg-amber-900 px-4 py-5 shadow sm:p-6">
+            <dt class="truncate text-sm font-medium text-stone-300">Over</dt>
+            <dd class="mt-1 text-3xl font-semibold tracking-tight text-stone-100">800,000</dd>
+          </div>
+          <div class="overflow-hidden bg-amber-900 px-4 py-5 shadow sm:p-6">
+            <dt class="truncate text-sm font-medium text-stone-300">Avg. Click Rate</dt>
+            <dd class="mt-1 text-3xl font-semibold tracking-tight text-stone-100">24.57%</dd>
+          </div>
+        </dl>
+      </div>
+      <!-- Get Notified -->
+      <div class="mx-auto my-auto max-w-5xl lg:pb-24 sm:pb-12">
+        <div class="relative isolate overflow-hidden bg-stone-300 px-6 py-24 shadow-2xl sm:px-3xl sm:px-24 xl:py-32">
+          <h2 class="mx-auto max-w-2xl text-center text-3xl font-bold tracking-tight text-stone-700 sm:text-4xl">Get notified when we’re launching.</h2>
+          <p class="mx-auto mt-2 max-w-xl text-center text-lg leading-8 text-stone-500">Reprehenderit ad esse et non officia in nulla. Id proident tempor incididunt nostrud nulla et culpa.</p>
+          <%# form %>
+          <%= render 'subscribers/form' %>
+          <svg viewBox="0 0 1024 1024" class="absolute left-1/2 top-1/2 -z-10 h-[64rem] w-[64rem] -translate-x-1/2" aria-hidden="true">
+            <circle cx="512" cy="512" r="512" fill="url(#759c1415-0410-454c-8f7c-9a820de03641)" fill-opacity="0.7" />
+            <defs>
+            </defs>
+          </svg>
+        </div>
       </div>
     </div>
+    <!--footer-->
   </div>
+</div>
+</div>
 </body>
