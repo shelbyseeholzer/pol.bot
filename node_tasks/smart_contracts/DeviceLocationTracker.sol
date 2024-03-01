@@ -6,11 +6,11 @@ contract DeviceLocationTracker {
     mapping(address => bool) public authorizedUpdaters;
 
     struct Location {
-        uint latitude;
-        uint longitude;
+        int latitude;
+        int longitude;
     }
-    // map device_id => Location
-    mapping(string => Location) public deviceLocations;
+    // map keccak256(device_id) => Location
+    mapping(bytes32 => Location) public deviceLocations;
 
     constructor() {
         owner = msg.sender; // Set the contract creator as the initial owner
@@ -43,22 +43,52 @@ contract DeviceLocationTracker {
     }
 
     // Function to retrieve a device's location
-    function getLocation(string memory deviceId) public view returns (uint latitude, uint longitude) {
+    function getLocation(bytes32 memory deviceId) public view returns (int latitude, int longitude) {
         Location memory loc = deviceLocations[deviceId];
         return (loc.latitude, loc.longitude);
     }
  
     // Function to see if a device is at a location
-    function isDeviceAtLocation(string memory deviceId, uint _latitude, uint _longitude) public view returns (bool) {
+    function isDeviceAtLocation(bytes32 memory deviceId, int _latitude, int _longitude) public view returns (bool) {
         Location memory loc = deviceLocations[deviceId];
         return (loc.latitude == _latitude && loc.longitude == _longitude);
     }
 
-    // Function to update locations for multiple devices
-    function updateLocationsBatch(string[] memory deviceIds, uint[] memory latitudes, uint[] memory longitudes) public {
+    // This returns true if the device ID is withing the radius represented in meters from the target lat and lng.
+    function isDeviceWithinDistance(
+        bytes32 memory deviceId,
+        int targetLatitude,
+        int targetLongitude,
+        int radiusInMeters
+    ) public view returns (bool) {
+        Location memory deviceLoc = deviceLocations[deviceId];
+        
+        // Convert the radius from meters to degrees approximately
+        // Note: 1 degree of latitude is approximately 111km (111,000 meters)
+        int latDifference = abs(deviceLoc.latitude - targetLatitude);
+        int longDifference = abs(deviceLoc.longitude - targetLongitude);
+        
+        // Convert differences to meters
+        // Assuming roughly 111,000 meters per degree for both latitude and longitude
+        int latDistanceInMeters = latDifference * 111000;
+        int longDistanceInMeters = longDifference * 111000;
+
+        // Check if the device is within the "circular" radius around the target location
+        // This is a simplification and not accurate for large distances or close to the poles
+        return (latDistanceInMeters <= radiusInMeters && longDistanceInMeters <= radiusInMeters);
+    }
+
+    // Helper function for absolute value
+    function abs(int x) private pure returns (int) {
+        return x >= 0 ? x : -x;
+    }
+
+    // Function to update locations for multiple devices.
+    // Accepts the keccak256 hash of deviceId as imput. 
+    function updateLocationsBatch(bytes32[] memory deviceIds, int[] memory latitudes, int[] memory longitudes) public {
         require(deviceIds.length == latitudes.length && latitudes.length == longitudes.length, "Data arrays must have the same length");
 
-        for (uint i = 0; i < deviceIds.length; i++) {
+        for (int i = 0; i < deviceIds.length; i++) {
             deviceLocations[deviceIds[i]] = Location(latitudes[i], longitudes[i]);
         }
     }

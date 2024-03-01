@@ -51,6 +51,8 @@ gem 'bootsnap', require: false
 # brige from rails to javascript
 gem 'mini_racer'
 
+gem 'eth'
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'debug', platforms: %i[mri mingw x64_mingw]

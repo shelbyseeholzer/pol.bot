@@ -7,6 +7,8 @@ const {
     AccountBalanceQuery,
     Hbar,
     TransferTransaction,
+    ContractExecuteTransaction,
+    ContractFunctionParameters,
 } = require("@hashgraph/sdk");
 
 require("dotenv").config();
@@ -34,11 +36,18 @@ client.setDefaultMaxTransactionFee(new Hbar(100));
 //Set the maximum payment for queries (in Hbar)
 // client.setMaxQueryPayment(new Hbar(50));
 
+// Helper function to convert geographic coordinates to a scaled integer representation
+function convertGeoCoordToInt(coord) {
+    // Scale factor, e.g., 10^6 for 6 decimal places
+    const scaleFactor = 1000000;
+    return Math.round(coord * scaleFactor).toString();
+}
 // Assume all necessary Hedera SDK imports and client initialization are done below
 async function setLocation(gas, newContractId, deviceId, lat, long) {
     const contractExecTx = await new ContractExecuteTransaction()
         .setContractId(newContractId)
         .setGas(gas)
+        // how to add deviceid if its a bunch of bytes
         .setFunction("updateLocationsBatch", new ContractFunctionParameters().addStringArray([deviceId]).addUint256Array([lat]).addUint256Array([long]));
 
     const submitExecTx = await contractExecTx.execute(client);
@@ -46,4 +55,7 @@ async function setLocation(gas, newContractId, deviceId, lat, long) {
 
     // Return a value, for example, the transaction status
     return receipt.status.toString();
-} 
+}
+
+// Call the setLocation function
+setLocation(10000, '0.0.3640786', "device_1", "0.1", "0.2").catch(console.error);
