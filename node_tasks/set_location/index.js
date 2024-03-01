@@ -43,12 +43,12 @@ function convertGeoCoordToInt(coord) {
     return Math.round(coord * scaleFactor).toString();
 }
 // Assume all necessary Hedera SDK imports and client initialization are done below
-async function setLocation(gas, newContractId, deviceId, lat, long) {
+async function setLocation(gas, newContractId, deviceId, lat, lng) {
     const contractExecTx = await new ContractExecuteTransaction()
         .setContractId(newContractId)
         .setGas(gas)
         // how to add deviceid if its a bunch of bytes
-        .setFunction("updateLocationsBatch", new ContractFunctionParameters().addStringArray([deviceId]).addUint256Array([lat]).addUint256Array([long]));
+        .setFunction("updateLocationsBatch", new ContractFunctionParameters().addBytes32Array([deviceId]).addInt256Array([lat]).addInt256Array([lng]));
 
     const submitExecTx = await contractExecTx.execute(client);
     const receipt = await submitExecTx.getReceipt(client);
