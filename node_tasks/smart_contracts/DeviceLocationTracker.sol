@@ -43,20 +43,20 @@ contract DeviceLocationTracker {
     }
 
     // Function to retrieve a device's location
-    function getLocation(bytes32 memory deviceId) public view returns (int latitude, int longitude) {
+    function getLocation(bytes32 deviceId) public view returns (int latitude, int longitude) {
         Location memory loc = deviceLocations[deviceId];
         return (loc.latitude, loc.longitude);
     }
  
     // Function to see if a device is at a location
-    function isDeviceAtLocation(bytes32 memory deviceId, int _latitude, int _longitude) public view returns (bool) {
+    function isDeviceAtLocation(bytes32 deviceId, int _latitude, int _longitude) public view returns (bool) {
         Location memory loc = deviceLocations[deviceId];
         return (loc.latitude == _latitude && loc.longitude == _longitude);
     }
 
     // This returns true if the device ID is withing the radius represented in meters from the target lat and lng.
     function isDeviceWithinDistance(
-        bytes32 memory deviceId,
+        bytes32 deviceId,
         int targetLatitude,
         int targetLongitude,
         int radiusInMeters
@@ -84,14 +84,12 @@ contract DeviceLocationTracker {
     }
 
     // Function to update locations for multiple devices.
-    // Accepts the keccak256 hash of deviceId as imput. 
-    function updateLocationsBatch(bytes32[] memory deviceIds, int[] memory latitudes, int[] memory longitudes) public {
+    // Accepts the keccak256 hash of deviceId as imput.
+    function updateLocationsBatch(bytes32[] memory deviceIds, int[] memory latitudes, int[] memory longitudes) public onlyAuthorized {
         require(deviceIds.length == latitudes.length && latitudes.length == longitudes.length, "Data arrays must have the same length");
 
-        for (int i = 0; i < deviceIds.length; i++) {
+        for (uint i = 0; i < deviceIds.length; i++) {
             deviceLocations[deviceIds[i]] = Location(latitudes[i], longitudes[i]);
         }
-    }
-    
+    }    
 }
-

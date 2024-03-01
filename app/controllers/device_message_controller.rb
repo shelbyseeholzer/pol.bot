@@ -2,11 +2,11 @@
 # This controller is responsible for accepting device messages and writing them to the database
 # It also writes the device location message to the Hedera Smart Contract
 
-require 'mini_racer'
 require 'eth'
-require 'json'
 
 class DeviceMessageController < ApplicationController
+  skip_before_action :verify_authenticity_token, only: [:create]
+
   def create
     device_message = DeviceMessage.new(message_content: grab_message_params)
     #  accept message and put it in the sql database
@@ -37,26 +37,16 @@ class DeviceMessageController < ApplicationController
     set_location(deviceId, gateway_lat, gateway_long)
   end
 
-  # This will call the JavaScript code
-  def set_location(_deviceId, _lat, _lng) # rubocop:disable Metrics/MethodLength
-    # Prepare the JavaScript environment and load the SDK along with your function
-    context = MiniRacer::Context.new
-
-    # Join together the path to the JavaScript file then read
-    js_file_path = Rails.root.join('node_tasks', 'set_location', 'index.js')
-    context.eval(File.read(js_file_path))
-    # Convert Ruby arguments to JavaScript code
-
+  def set_location(_deviceId, _lat, _lng)
     # pass in setLocation(gas, newContractId, deviceId, lat, long)
     gas = 100_000
-    new_contract_id = '0.0.3640786' # ENV['HEDERA_CONTRACT_ID']
+    new_contract_id = '0.0.3642899' # ENV['HEDERA_CONTRACT_ID']
     lat_int = convert_geo_string_to_int(_lat)
     lng_int = convert_geo_string_to_int(_lng)
     device_bytes32 = convert_string_to_keccak256(_deviceId)
-    js_code = "setLocation(#{gas}, '#{new_contract_id}', #{device_bytes32}, #{lat_int}, #{lng_int}).then(function(result) { return result; })"
 
-    # Execute the JavaScript function asynchronously and capture the result
-    result = context.eval(js_code)
+    result = GoSetLocation.setLocation(gas, new_contract_id, device_bytes32, lat_int, lng_int, ENV['MY_ACCOUNT_ID'],
+                                       ENV['MY_PRIVATE_KEY'])
 
     # Use the result in your Ruby code
     puts "Transaction status from JavaScript: #{result}"
@@ -72,12 +62,9 @@ class DeviceMessageController < ApplicationController
 
   def convert_string_to_keccak256(_string)
     # Compute the keccak256 hash of the device ID.
-    hash_hex = Eth::Utils.keccak256(_string)
+    hash_bytes = Eth::Util.keccak256(_string)
 
-    # Convert the hex string to an array of unt8.
-    hash_bytes = hash_hex.each_byte.mat(&:ord)
-
-    # Convert the Ruby array into a JavaScript array literal.
-    hash_bytes.to_json
+    # Convert the binary hash to a hexadecimal string.
+    hash_bytes.unpack1('H*')
   end
 end

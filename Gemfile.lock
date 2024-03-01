@@ -88,6 +88,10 @@ GEM
     debug (1.8.0)
       irb (>= 1.5.0)
       reline (>= 0.3.1)
+    dotenv (3.1.0)
+    dotenv-rails (3.1.0)
+      dotenv (= 3.1.0)
+      railties (>= 6.1)
     erubi (1.12.0)
     eth (0.5.11)
       forwardable (~> 1.3)
@@ -274,7 +278,9 @@ DEPENDENCIES
   bootsnap
   capybara
   debug
+  dotenv-rails
   eth
+  ffi
   htmlbeautifier
   importmap-rails
   jbuilder

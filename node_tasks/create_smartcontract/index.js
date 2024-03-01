@@ -41,7 +41,7 @@ client.setDefaultMaxTransactionFee(new Hbar(100));
 // client.setMaxQueryPayment(new Hbar(50));
 
 //Import the compiled contract from the HederaSmartContract.json file
-let hederaSmartContract = require("../smart_contracts/HederaSmartContract.json");
+let hederaSmartContract = require("../smart_contracts/DeviceLocationTracker_bytecode.json");
 const bytecode = hederaSmartContract.object;
 
 async function main() {
