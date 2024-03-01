@@ -12,6 +12,14 @@ contract DeviceLocationTracker {
     // map keccak256(device_id) => Location
     mapping(bytes32 => Location) public deviceLocations;
 
+    // Events
+    event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);
+    event AuthorizedUpdaterAdded(address indexed updater);
+    event AuthorizedUpdaterRemoved(address indexed updater);
+    event LocationUpdated(bytes32 indexed deviceId, int latitude, int longitude);
+    event AuthorizationFailure(address indexed caller);
+    event UpdateFailure(string reason);
+
     constructor() {
         owner = msg.sender; // Set the contract creator as the initial owner
         authorizedUpdaters[owner] = true; // Automatically authorize the owner
@@ -19,27 +27,39 @@ contract DeviceLocationTracker {
 
     // Modifier to restrict function access to authorized addresses only
     modifier onlyAuthorized() {
-        require(authorizedUpdaters[msg.sender], "Caller is not authorized");
+        if (!authorizedUpdaters[msg.sender]) {
+            emit AuthorizationFailure(msg.sender);
+            revert("Caller is not authorized");
+        }
         _;
     }
 
-    // Function to transfer ownership of the contract
     function transferOwnership(address newOwner) public {
-        require(msg.sender == owner, "Caller is not the owner");
+        if (msg.sender != owner) {
+            emit UpdateFailure("Caller is not the owner");
+            revert("Caller is not the owner");
+        }
+        emit OwnershipTransferred(owner, newOwner);
         owner = newOwner;
-        authorizedUpdaters[newOwner] = true; // Automatically authorize the new owner
+        authorizedUpdaters[newOwner] = true;
     }
 
-    // Function to add an authorized updater
     function addAuthorizedUpdater(address updater) public {
-        require(msg.sender == owner, "Caller is not the owner");
+        if (msg.sender != owner) {
+            emit UpdateFailure("Caller is not the owner");
+            revert("Caller is not the owner");
+        }
         authorizedUpdaters[updater] = true;
+        emit AuthorizedUpdaterAdded(updater);
     }
 
-    // Function to remove an authorized updater
     function removeAuthorizedUpdater(address updater) public {
-        require(msg.sender == owner, "Caller is not the owner");
+        if (msg.sender != owner) {
+            emit UpdateFailure("Caller is not the owner");
+            revert("Caller is not the owner");
+        }
         authorizedUpdaters[updater] = false;
+        emit AuthorizedUpdaterRemoved(updater);
     }
 
     // Function to retrieve a device's location
@@ -86,10 +106,14 @@ contract DeviceLocationTracker {
     // Function to update locations for multiple devices.
     // Accepts the keccak256 hash of deviceId as imput.
     function updateLocationsBatch(bytes32[] memory deviceIds, int[] memory latitudes, int[] memory longitudes) public onlyAuthorized {
-        require(deviceIds.length == latitudes.length && latitudes.length == longitudes.length, "Data arrays must have the same length");
+        if (deviceIds.length != latitudes.length || latitudes.length != longitudes.length) {
+            emit UpdateFailure("Data arrays must have the same length");
+            revert("Data arrays must have the same length");
+        }
 
         for (uint i = 0; i < deviceIds.length; i++) {
             deviceLocations[deviceIds[i]] = Location(latitudes[i], longitudes[i]);
+            emit LocationUpdated(deviceIds[i], latitudes[i], longitudes[i]);
         }
-    }    
+    } 
 }

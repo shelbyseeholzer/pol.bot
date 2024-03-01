@@ -11,6 +11,102 @@
                 "type": "constructor"
             },
             {
+                "anonymous": false,
+                "inputs": [
+                    {
+                        "indexed": true,
+                        "internalType": "address",
+                        "name": "caller",
+                        "type": "address"
+                    }
+                ],
+                "name": "AuthorizationFailure",
+                "type": "event"
+            },
+            {
+                "anonymous": false,
+                "inputs": [
+                    {
+                        "indexed": true,
+                        "internalType": "address",
+                        "name": "updater",
+                        "type": "address"
+                    }
+                ],
+                "name": "AuthorizedUpdaterAdded",
+                "type": "event"
+            },
+            {
+                "anonymous": false,
+                "inputs": [
+                    {
+                        "indexed": true,
+                        "internalType": "address",
+                        "name": "updater",
+                        "type": "address"
+                    }
+                ],
+                "name": "AuthorizedUpdaterRemoved",
+                "type": "event"
+            },
+            {
+                "anonymous": false,
+                "inputs": [
+                    {
+                        "indexed": true,
+                        "internalType": "bytes32",
+                        "name": "deviceId",
+                        "type": "bytes32"
+                    },
+                    {
+                        "indexed": false,
+                        "internalType": "int256",
+                        "name": "latitude",
+                        "type": "int256"
+                    },
+                    {
+                        "indexed": false,
+                        "internalType": "int256",
+                        "name": "longitude",
+                        "type": "int256"
+                    }
+                ],
+                "name": "LocationUpdated",
+                "type": "event"
+            },
+            {
+                "anonymous": false,
+                "inputs": [
+                    {
+                        "indexed": true,
+                        "internalType": "address",
+                        "name": "previousOwner",
+                        "type": "address"
+                    },
+                    {
+                        "indexed": true,
+                        "internalType": "address",
+                        "name": "newOwner",
+                        "type": "address"
+                    }
+                ],
+                "name": "OwnershipTransferred",
+                "type": "event"
+            },
+            {
+                "anonymous": false,
+                "inputs": [
+                    {
+                        "indexed": false,
+                        "internalType": "string",
+                        "name": "reason",
+                        "type": "string"
+                    }
+                ],
+                "name": "UpdateFailure",
+                "type": "event"
+            },
+            {
                 "inputs": [
                     {
                         "internalType": "address",
@@ -244,11 +340,11 @@
     },
     "sources": {
         "contracts/DeviceLocationTracker.sol": {
-            "keccak256": "0x8f5dd02ca66ad780ea2dae787c1bf9e0df66d60d8879b2bc6d4beae72932e967",
+            "keccak256": "0xfe63701da0b717f8c30d932e79c673273b323f190b964ed142fcc21b5a714360",
             "license": "MIT",
             "urls": [
-                "bzz-raw://50e3a871cd2a3ebc1982eb04aba8ef251c93819d1f3e13acad63fb8fbad63121",
-                "dweb:/ipfs/QmQQJmMrm81xXDeBZKZ6tQLWuYBY2qon6UgzBhGEVPuPWk"
+                "bzz-raw://db80a33f63b22b3922a1024619d942beab19684db4320228919ced5f5000b6c9",
+                "dweb:/ipfs/QmX8cZdmfHo44TnB9Lqoim2fxzqyVPpsBL9AHLY2EVodcS"
             ]
         }
     },

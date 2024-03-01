@@ -58,4 +58,4 @@ async function setLocation(gas, newContractId, deviceId, lat, lng) {
 }
 
 // Call the setLocation function
-// setLocation(10000, '0.0.3642899', "device_1", "0.1", "0.2").catch(console.error);
+// setLocation(10000, '0.0.3643101', "device_1", "0.1", "0.2").catch(console.error);

@@ -40,7 +40,7 @@ class DeviceMessageController < ApplicationController
   def set_location(_deviceId, _lat, _lng)
     # pass in setLocation(gas, newContractId, deviceId, lat, long)
     gas = 100_000
-    new_contract_id = '0.0.3642899' # ENV['HEDERA_CONTRACT_ID']
+    new_contract_id = '0.0.3643101' # ENV['HEDERA_CONTRACT_ID']
     lat_int = convert_geo_string_to_int(_lat)
     lng_int = convert_geo_string_to_int(_lng)
     device_bytes32 = convert_string_to_keccak256(_deviceId)

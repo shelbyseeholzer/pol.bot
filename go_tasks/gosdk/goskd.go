@@ -44,11 +44,21 @@ func setLocation(gas C.long, newContractId *C.char, deviceHash *C.char, lat C.lo
         return C.CString("Error converting deviceHash to bytes: " + err.Error())
     }
 
+    deviceArr := [][]byte{deviceBytes}
+    latArr := []int64{int64(lat)}
+    lngArr := []int64{int64(lng)}
+    if len(deviceArr) != len(latArr) {
+        return C.CString("Array lengths do not match: len(deviceArr) != len(latArr)")
+    }
+    if len(deviceArr) != len(lngArr) {
+        return C.CString("Array lengths do not match: len(deviceArr) != len(lngArr)")
+    }
+
     // Prepare the parameters for the smart contract function
     params := hedera.NewContractFunctionParameters().
-        AddBytes32Array([][]byte{deviceBytes}).
-        AddInt64Array([]int64{int64(lat)}).
-        AddInt64Array([]int64{int64(lng)})
+        AddBytes32Array(deviceArr).
+        AddInt64Array(latArr).
+        AddInt64Array(lngArr)
 
     // Execute the contract function
     tx, err := hedera.NewContractExecuteTransaction().
