@@ -74,7 +74,7 @@ contract DeviceLocationTracker {
         return (loc.latitude == _latitude && loc.longitude == _longitude);
     }
 
-    // This returns true if the device ID is withing the radius represented in meters from the target lat and lng.
+    // This returns true if the device ID is within the radius represented in meters from the target lat and lng.
     function isDeviceWithinDistance(
         bytes32 deviceId,
         int targetLatitude,

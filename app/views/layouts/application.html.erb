@@ -23,8 +23,8 @@ It is not content-- which should be stored in the view folder of the controller 
           <div class="flex flex-1 items-center">
             <div class="flex w-full items-center justify-between md:w-auto">
               <%= link_to(root_path) do %>
-                <span class="sr-only">Your Company</span>
-                <img class="h-8 w-auto sm:h-10" src=<%= image_path'polbotlogo.jpg' %> alt="polbotlogo">
+                <span class="sr-only">pol.bot</span>
+                <img class="h-8 w-auto sm:h-10" src=<%= image_path'polbotlogo.png' %> alt="polbotlogo">
               <% end %>
               <div class="-mr-2 flex items-center md:hidden">
                 <button type="button" class="focus-ring-inset relative inline-flex items-center justify-center bg-stone-900 p-2 text-stone-400 hover:bg-stone-800 focus:outline-none focus:ring-2 focus:ring-white" aria-expanded="false">
@@ -37,8 +37,8 @@ It is not content-- which should be stored in the view folder of the controller 
               </div>
             </div>
             <div class="hidden space-x-8 md:ml-10 md:flex">
-              <a href="<%= about_path %>" class="text-base font-medium text-stone-700 hover:text-stone-600" data-method="post">About</a>
-              <a href="<%= pricing_path %>" class="text-base font-medium text-stone-700 hover:text-stone-600" data-method="post">Pricing</a>
+              <a href="<%= root_path %>" class="text-base font-medium text-stone-700 hover:text-stone-600" data-method="post"></a>
+              <!-- <a href="<%= pricing_path %>" class="text-base font-medium text-stone-700 hover:text-stone-600" data-method="post">Pricing</a> -->
             </div>
           </div>
           <div class="hidden md:flex md:items-center md:space-x-6">
@@ -65,7 +65,7 @@ It is not content-- which should be stored in the view folder of the controller 
         <div class="xl:grid xl:grid-cols-3 xl:gap-8">
           <div class="space-y-8 xl:col-span-1">
             <%= link_to(root_path) do %>
-              <img class="h-10" src=<%= image_path'polbotlogo.jpg' %> alt="polbotlogo">
+              <img class="h-10" src=<%= image_path'polbotlogo.png' %> alt="polbotlogo">
             <% end %>
           </div>
           <div class="mt-12 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0">
